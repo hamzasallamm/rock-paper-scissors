@@ -4,6 +4,7 @@ const paperButton = document.querySelector("#paper");
 const scissorsButton = document.querySelector("#scissors");
 const score = document.querySelector("#score");
 const finalResult = document.querySelector("#final-result");
+const rounds = document.querySelector("#rounds");
 
 rockButton.addEventListener("click", function() {
     playRound("rock");
@@ -33,9 +34,16 @@ function getComputerChoice() {
 
 let humanscore = 0;
 let computerscore = 0;
+let currentRound = 0;
+let totalRounds;
 
 
 function playRound(humanSelection) {
+    if (currentRound === 0) {
+        totalRounds = parseInt(rounds.value);
+        rounds.disabled = true;
+    }
+
     const computerSelection = getComputerChoice();
     results.textContent = 'Computer chose: ' + computerSelection + ', You chose: ' + humanSelection;
 
@@ -48,39 +56,24 @@ function playRound(humanSelection) {
     ) {
         results.textContent += " Computer wins this round!";
         computerscore++;
+        currentRound++;
     } else {
         results.textContent += " You win this round!";
         humanscore++;
+        currentRound++;
     }
 
     score.textContent = `Score - You: ${humanscore}, Computer: ${computerscore}`;
-    if (humanscore === 5 || computerscore === 5) {
-    if (humanscore === 5) {
-        finalResult.textContent += " You won the game!";
-    } else {
-        finalResult.textContent += " Computer won the game!";
-    }
-}
-
+    if (currentRound >= totalRounds) {
+        if (humanscore > computerscore) {
+            finalResult.textContent += " You won the game!";
+        } else {
+            finalResult.textContent += " Computer won the game!";
+        }
+    
     rockButton.disabled = true;
     paperButton.disabled = true;
     scissorsButton.disabled = true;
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
-    console.log(`Final Score - You: ${humanscore}, Computer: ${computerscore}`);
-    alert(`Final Score - You: ${humanscore}, Computer: ${computerscore}`);
-    if (humanscore > computerscore) {
-        console.log("Congratulations! You won the game!");
-        alert("Congratulations! You won the game!");
-    } else if (humanscore < computerscore) {
-        console.log("Computer won the game! Better luck next time.");
-        alert("Computer won the game! Better luck next time.");
-    } else {
-        console.log("The game is a tie!");
-        alert("The game is a tie!");
-    }
 }
