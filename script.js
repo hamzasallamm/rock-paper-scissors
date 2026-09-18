@@ -61,6 +61,10 @@ function playRound(humanSelection) {
         finalResult.textContent += " Computer won the game!";
     }
 }
+
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
 }
 
 function game() {
