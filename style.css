@@ -1,0 +1,257 @@
+/* ---------- Base / reset ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+    color: #1e293b;
+}
+
+/* ---------- Game card ---------- */
+.game-card {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 10px 30px rgba(30, 41, 59, 0.12);
+    text-align: center;
+}
+
+.title {
+    margin: 0 0 24px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #4338ca;
+    letter-spacing: -0.02em;
+}
+
+/* ---------- Round selector ---------- */
+.rounds-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.rounds-selector label {
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.rounds-selector select {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 1rem;
+    color: #1e293b;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rounds-selector select:hover:not(:disabled) {
+    border-color: #6366f1;
+}
+
+.rounds-selector select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.rounds-selector select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ---------- Choice buttons ---------- */
+.choices {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.choice-btn {
+    flex: 1;
+    padding: 14px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: #6366f1;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+}
+
+.choice-btn:hover:not(:disabled) {
+    background: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(99, 102, 241, 0.35);
+}
+
+.choice-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.choice-btn:disabled {
+    background: #c7d2fe;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ---------- Battle animation ---------- */
+.battle-arena {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 64px;
+    margin-bottom: 12px;
+}
+
+.battle-icon {
+    flex: 1;
+    font-size: 2.75rem;
+    line-height: 1;
+}
+
+#player-choice {
+    text-align: right;
+}
+
+#computer-choice {
+    text-align: left;
+}
+
+.vs {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+/* Player (left side) */
+#player-choice.animate.win {
+    animation: player-win 1.2s ease;
+}
+
+#player-choice.animate.lose {
+    animation: player-lose 1.2s ease forwards;
+}
+
+#player-choice.animate.tie {
+    animation: player-tie 1.2s ease;
+}
+
+/* Computer (right side) */
+#computer-choice.animate.win {
+    animation: computer-win 1.2s ease;
+}
+
+#computer-choice.animate.lose {
+    animation: computer-lose 1.2s ease forwards;
+}
+
+#computer-choice.animate.tie {
+    animation: computer-tie 1.2s ease;
+}
+
+/* Winner on the left lunges right into the opponent */
+@keyframes player-win {
+    0% { transform: translateX(-150%) rotate(-30deg); opacity: 0; }
+    40% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    60% { transform: translateX(22%) rotate(12deg); }
+    80% { transform: translateX(-4%) rotate(-4deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
+
+/* Loser on the left gets knocked back and fades */
+@keyframes player-lose {
+    0% { transform: translateX(-150%) rotate(-30deg); opacity: 0; }
+    40% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    55% { transform: translateX(-8%) rotate(-8deg); }
+    70% { transform: translateX(28%) rotate(20deg) scale(0.8); opacity: 0.6; }
+    100% { transform: translateX(-35%) rotate(-15deg) scale(0.55); opacity: 0.25; }
+}
+
+@keyframes player-tie {
+    0% { transform: translateX(-150%); opacity: 0; }
+    50% { transform: translateX(0); opacity: 1; }
+    65% { transform: translateX(8%); }
+    100% { transform: translateX(0); }
+}
+
+/* Winner on the right lunges left into the opponent */
+@keyframes computer-win {
+    0% { transform: translateX(150%) rotate(30deg); opacity: 0; }
+    40% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    60% { transform: translateX(-22%) rotate(-12deg); }
+    80% { transform: translateX(4%) rotate(4deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
+
+/* Loser on the right gets knocked back and fades */
+@keyframes computer-lose {
+    0% { transform: translateX(150%) rotate(30deg); opacity: 0; }
+    40% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    55% { transform: translateX(8%) rotate(8deg); }
+    70% { transform: translateX(-28%) rotate(-20deg) scale(0.8); opacity: 0.6; }
+    100% { transform: translateX(35%) rotate(15deg) scale(0.55); opacity: 0.25; }
+}
+
+@keyframes computer-tie {
+    0% { transform: translateX(150%); opacity: 0; }
+    50% { transform: translateX(0); opacity: 1; }
+    65% { transform: translateX(-8%); }
+    100% { transform: translateX(0); }
+}
+
+/* ---------- Result / score text ---------- */
+.result {
+    min-height: 1.4em;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.score {
+    min-height: 1.4em;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.final-result {
+    min-height: 1.6em;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #059669;
+}
+
+.final-result:empty {
+    display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+    .game-card {
+        padding: 24px 18px;
+    }
+
+    .choices {
+        flex-direction: column;
+    }
+}

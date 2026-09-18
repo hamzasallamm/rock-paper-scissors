@@ -4,24 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
+    <main class="game-card">
+        <h1 class="title">Rock Paper Scissors</h1>
 
-    <div id="result"></div>
-    <div id="score"></div>
-    <div id="final-result"></div>
+        <div class="rounds-selector">
+            <label for="rounds">Choose number of rounds, draws don't count!</label>
+            <select id="rounds">
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="9">9</option>
+            </select>
+        </div>
 
-    <label for="rounds">Choose number of rounds, draw don't count! :</label>
+        <div class="choices">
+            <button id="rock" class="choice-btn">Rock</button>
+            <button id="paper" class="choice-btn">Paper</button>
+            <button id="scissors" class="choice-btn">Scissors</button>
+        </div>
 
-    <select id="rounds">
-        <option value="3">3</option>
-        <option value="5">5</option>
-        <option value="7">7</option>
-        <option value="9">9</option>
-    </select>
+        <div class="battle-arena">
+            <div id="player-choice" class="battle-icon"></div>
+            <div class="vs">VS</div>
+            <div id="computer-choice" class="battle-icon"></div>
+        </div>
+
+        <div id="result" class="result"></div>
+        <div id="score" class="score"></div>
+        <div id="final-result" class="final-result"></div>
+    </main>
 
     <script src="script.js"></script>
 </body>
