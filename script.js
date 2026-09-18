@@ -10,17 +10,6 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let hc = prompt("Enter your choice (rock, paper, scissors):");
-    hc = hc.toLowerCase();
-    if (hc ==="rock" || hc ==="paper" || hc ==="scissors"){
-        return hc
-    }
-    else{
-        alert("Not a valid choice");
-        return getHumanChoice();
-    }
-}
 
 let humanscore = 0;
 let computerscore = 0;
@@ -69,5 +58,3 @@ function game() {
         alert("The game is a tie!");
     }
 }
-
-game();
