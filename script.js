@@ -1,3 +1,8 @@
+const results = document.querySelector("#result");
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
 console.log("Rock Paper Scissors Game");
 function getComputerChoice() {
     let cc =parseInt(Math.random() * 3);
@@ -15,9 +20,8 @@ let humanscore = 0;
 let computerscore = 0;
 
 
-function playRound(){
+function playRound(humanSelection) {
     const computerSelection = getComputerChoice();
-    const humanSelection = getHumanChoice();
     console.log(`Computer chose: ${computerSelection}`);
     console.log(`You chose: ${humanSelection}`);
     alert(`Computer chose: ${computerSelection}`);
